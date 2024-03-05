@@ -10,7 +10,7 @@ class PatientSignUpForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.role = User.ROLES[0]
+        user.role = User.ROLES[0][0]
         if commit:
             user.save()
         return user
@@ -23,7 +23,8 @@ class DoctorSignUpForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.role = User.ROLES[1]
+        user.role = User.ROLES[1][0]
+        user.is_active = False
         if commit:
             user.save()
         return user
@@ -36,7 +37,8 @@ class NurseSignUpForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.role = User.ROLES[2]
+        user.role = User.ROLES[2][0]
+        user.is_active = False
         if commit:
             user.save()
         return user
@@ -46,4 +48,4 @@ class UserChangeForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ("username", "email")
+        fields = ("is_active",)

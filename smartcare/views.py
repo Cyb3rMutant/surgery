@@ -61,10 +61,12 @@ class DoctorSignUpView(CreateView):
 def home(request):
     if request.user.is_authenticated:
         match request.user.role:
-            case 0:
+            case "patient":
                 return render(request, "dashboards/patient.html")
-            case 1:
-                return render(request, "dashboards/doctor.html")
-            case 2:
-                return render(request, "dashboards/nurse.html")
+            case "doctor":
+                if request.user.is_active:
+                    return render(request, "dashboards/doctor.html")
+            case "nurse":
+                if request.user.is_active:
+                    return render(request, "dashboards/nurse.html")
     return render(request, "home.html")
