@@ -3,8 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
-class Patient(AbstractUser):
-    pass
-
-    def __str__(self):
-        return self.username
+class User(AbstractUser):
+    ROLES = (("patient", "Patient"), ("doctor", "Doctor"), ("nurse", "Nurse"))
+    role = models.CharField(max_length=20, choices=ROLES, default="patient")

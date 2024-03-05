@@ -1,8 +1,10 @@
-{% extends "base.html" %} {% block title %}Homeeeeeeeeeeeeeeeeeee{% endblock %}
-{% block content %} {% if user.is_authenticated %} Hi {{ user.username }}!
-<p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a> |
-<a href="{% url 'signup' %}">Sign Up</a>
-{% endif %} {% endblock %}
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Welcome to the Django Schools! <span class="icon-emo-happy"></span></h2>
+  <p class="lead">
+    If you already have an account, go ahead and <a href="{% url 'login' %}">log in</a>. If you are new to Django Schools, get started
+    by creating a <a href="{% url 'patient_signup' %}">patient account</a>, <a href="{% url 'doctor_signup' %}">doctor account</a> or a <a href="{% url 'nurse_signup' %}">nurse account</a>.
+
+  </p>
+  <hr>
+{% endblock %}

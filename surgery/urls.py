@@ -18,10 +18,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from smartcare import views
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path("", views.home, name="home"),
     path("admin/", admin.site.urls),
     path("smartcare/", include("smartcare.urls")),
     path("smartcare/", include("django.contrib.auth.urls")),
+    path("accounts/signup/", views.SignUpView.as_view(), name="signup"),
+    path(
+        "accounts/signup/doctor/",
+        views.DoctorSignUpView.as_view(),
+        name="doctor_signup",
+    ),
+    path(
+        "accounts/signup/nurse/",
+        views.NurseSignUpView.as_view(),
+        name="nurse_signup",
+    ),
+    path(
+        "accounts/signup/patient/",
+        views.PatientSignUpView.as_view(),
+        name="patient_signup",
+    ),
 ]
