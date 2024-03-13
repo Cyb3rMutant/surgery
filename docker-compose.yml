@@ -44,7 +44,11 @@ services:
     # The volume "db_data" will be created if it does not exist.
     volumes:
       - db_data:/var/lib/postgresql/data
-
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 # Volumes
 volumes:
   # "db_data" volume definition

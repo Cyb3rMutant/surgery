@@ -2,11 +2,26 @@ from django.contrib.auth import login
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.shortcuts import redirect, render
-from .forms import UserCreationForm
+from .forms import AppointmentForm, UserCreationForm
 from django.views.generic import TemplateView
+from django.contrib import messages
 
-from .models import User
+from .models import Appointment, User
 from .forms import DoctorSignUpForm, NurseSignUpForm, PatientSignUpForm
+
+
+def home(request):
+    if request.user.is_authenticated:
+        match request.user.role:
+            case "patient":
+                return render(request, "dashboards/patient.html")
+            case "doctor":
+                if request.user.is_active:
+                    return render(request, "dashboards/doctor.html")
+            case "nurse":
+                if request.user.is_active:
+                    return render(request, "dashboards/nurse.html")
+    return render(request, "home.html")
 
 
 class SignUpView(TemplateView):
@@ -58,15 +73,17 @@ class DoctorSignUpView(CreateView):
         return redirect("home")
 
 
-def home(request):
-    if request.user.is_authenticated:
-        match request.user.role:
-            case "patient":
-                return render(request, "dashboards/patient.html")
-            case "doctor":
-                if request.user.is_active:
-                    return render(request, "dashboards/doctor.html")
-            case "nurse":
-                if request.user.is_active:
-                    return render(request, "dashboards/nurse.html")
-    return render(request, "home.html")
+class MakeAppointment(CreateView):
+    model = Appointment
+    form_class = AppointmentForm
+    template_name = "patient/appointment.html"
+
+    def form_valid(self, form):
+        appointment = form.save(commit=False)
+        appointment.patient = self.request.user
+        appointment.save()
+        messages.success(
+            self.request,
+            "appointment booked",
+        )
+        return redirect("home")

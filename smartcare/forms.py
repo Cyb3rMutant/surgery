@@ -1,6 +1,7 @@
+from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import User
+from .models import Appointment, User
 
 
 class PatientSignUpForm(UserCreationForm):
@@ -49,3 +50,14 @@ class UserChangeForm(UserChangeForm):
     class Meta:
         model = User
         fields = ("is_active",)
+
+
+class AppointmentForm(forms.ModelForm):
+    date = forms.DateField(input_formats=["%m/%d/%Y", "%m/%d/%y"])
+
+    class Meta:
+        model = Appointment
+        fields = (
+            "description",
+            "date",
+        )
