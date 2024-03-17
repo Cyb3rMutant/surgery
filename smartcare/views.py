@@ -1,9 +1,9 @@
 from django.contrib.auth import login
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .forms import AppointmentForm, UserCreationForm
-from django.views.generic import TemplateView
+from django.views.generic import ListView, TemplateView
 from django.contrib import messages
 
 from .models import Appointment, User
@@ -87,3 +87,25 @@ class MakeAppointment(CreateView):
             "appointment booked",
         )
         return redirect("home")
+
+
+class AppointmentListView(ListView):
+    model = Appointment
+    ordering = ("date",)
+    context_object_name = "appointments"
+    template_name = "doctor/view-appointments.html"
+
+    def get_queryset(self):
+        queryset = Appointment.objects.all()
+        return queryset
+
+
+def appoint(request, pk):
+    appointment = get_object_or_404(Appointment, pk=pk)
+    return render(
+        request,
+        "doctor/appoint.html",
+        {
+            "appointment": appointment,
+        },
+    )
