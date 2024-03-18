@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block content %}
+<table>
+  <thead>
+    <tr>
+      <th>description</th>
+      <th>date</th>
+      <th>doctor</th>
+      <th>details</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pre in prescriptions %}
+    <tr>
+      <td>{{ pre.appointment.date }}</td>
+      <td>{{ pre.appointment.description }}</td>
+      <td>{{ pre.doctor }}</td>
+      <td>{{ pre.details }}</td>
+      <td>{{ pre.price }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">No prescriptions</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

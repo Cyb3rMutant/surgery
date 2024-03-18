@@ -23,8 +23,8 @@ from smartcare import views
 urlpatterns = [
     path("", views.home, name="home"),
     path("admin/", admin.site.urls),
-    path("smartcare/", include("smartcare.urls")),
-    path("smartcare/", include("django.contrib.auth.urls")),
+    path("", include("smartcare.urls")),
+    path("", include("django.contrib.auth.urls")),
     path("accounts/signup/", views.SignUpView.as_view(), name="signup"),
     path(
         "accounts/signup/doctor/",

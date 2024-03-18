@@ -12,3 +12,10 @@ class Appointment(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField()
     date = models.DateField()
+
+
+class Prescription(models.Model):
+    appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(User, on_delete=models.CASCADE)
+    details = models.TextField()
+    price = models.IntegerField()

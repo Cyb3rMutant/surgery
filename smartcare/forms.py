@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import Appointment, User
+from .models import Appointment, Prescription, User
 
 
 class PatientSignUpForm(UserCreationForm):
@@ -60,4 +60,13 @@ class AppointmentForm(forms.ModelForm):
         fields = (
             "description",
             "date",
+        )
+
+
+class PrescriptionForm(forms.ModelForm):
+    class Meta:
+        model = Prescription
+        fields = (
+            "details",
+            "price",
         )

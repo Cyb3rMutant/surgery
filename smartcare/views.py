@@ -1,12 +1,13 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import AppointmentForm, UserCreationForm
+from .forms import AppointmentForm, PrescriptionForm, UserCreationForm
 from django.views.generic import ListView, TemplateView
+from django.db import transaction
 from django.contrib import messages
 
-from .models import Appointment, User
+from .models import Appointment, Prescription, User
 from .forms import DoctorSignUpForm, NurseSignUpForm, PatientSignUpForm
 
 
@@ -22,6 +23,11 @@ def home(request):
                 if request.user.is_active:
                     return render(request, "dashboards/nurse.html")
     return render(request, "home.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("home")
 
 
 class SignUpView(TemplateView):
@@ -102,10 +108,41 @@ class AppointmentListView(ListView):
 
 def appoint(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
+    if Prescription.objects.filter(pk=pk).exists():
+        print("already done")
+        return redirect("home")
+
+    if request.method == "POST":
+        form = PrescriptionForm(data=request.POST)
+        if form.is_valid():
+            with transaction.atomic():
+                prescription = form.save(commit=False)
+                prescription.appointment = appointment
+                prescription.doctor = request.user
+                prescription.save()
+
+                print("now done")
+                return redirect("home")
+    form = PrescriptionForm()
+
     return render(
         request,
         "doctor/appoint.html",
         {
             "appointment": appointment,
+            "form": form,
         },
     )
+
+
+class ViewPrescriptions(ListView):
+    model = Prescription
+    ordering = ("date",)
+    context_object_name = "prescriptions"
+    template_name = "patient/view-prescriptions.html"
+
+    def get_queryset(self):
+        appointments = Appointment.objects.filter(patient=self.request.user)
+        print("\n\n\n", appointments)
+        queryset = Prescription.objects.filter(appointment__in=appointments)
+        return queryset
