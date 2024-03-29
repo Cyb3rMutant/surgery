@@ -1,9 +1,9 @@
 ![image](src/uwe.png)
 
-# Module Name: Advanced System Programming - Assignment
-### Module code: UFCFWR‑15‑3
+# Module Name: Distributed and enterprise software development - Assignment
+### Module code: UFCFTR-30-3
 #### Module Leader Name: Mehmet Aydin
-#### Students Names:  Yazeed Abu-Hummos , Zhiqiang Song, Ismail Hassan & Jaspreet Singh
+#### Students Names:  Yazeed Abu-Hummos , Ismail Hassan, Zhiqiang Song, & Jaspreet Singh
 #### Group No: 4 
 #### Project Title: SmartCare Surgery
 
@@ -17,7 +17,7 @@
  - sqlparse==0.4.4
 
 
-### Test Reflection explanation could be found in each Test file
+### Test Reflection explanation could be found in Test file
 
 ### How to run: 
        cd'filedestination'
