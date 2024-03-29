@@ -3,9 +3,9 @@
 # Module Name: Advanced System Programming - Assignment
 ### Module code: UFCFWR‑15‑3
 #### Module Leader Name: Mehmet Aydin
-#### Students Names:
+#### Students Names:  Yazeed Abu-Hummos , Zhiqiang Song, Ismail Hassan & Jaspreet Singh
 #### Group No: 4 
-#### Project Title: 
+#### Project Title: SmartCare Surgery
 
 ## Technologies Employed are: 
  - Visual Studio Code
@@ -17,7 +17,7 @@
  - sqlparse==0.4.4
 
 
-### Test Reflection explanation can be found in each Task file
+### Test Reflection explanation could be found in each Test file
 
 ### How to run: 
        cd'filedestination'
