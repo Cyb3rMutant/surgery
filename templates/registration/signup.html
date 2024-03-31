@@ -1,12 +1,70 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <div class="row">
-      <h2>Sign up as a {{ user_type }}</h2>
-      <form method="post" novalidate>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    body {
+        height: 100vh;
+        background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        color: #03e9f4;
+    }
+
+    .row {
+        text-align: center; /* Center-align content */
+        width: 50%; /* Adjust width of the form */
+        margin: 0 auto; /* Center the form horizontally */
+    }
+
+    input,
+    select {
+        margin: 10px 0; /* Add space around input fields */
+        border-radius: 5px;
+        border: none;
+        height: 30px;
+        width: 100%; /* Make inputs full width */
+        background-color: rgba(216, 191, 216, 0.5);
+        outline: none;
+        color: #f0edf3;
+        padding-left: 10px;
+    }
+
+    button {
+        margin-top: 10px; /* Add space above the button */
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(100, 149, 237, .7);
+        color: aliceblue;
+        width: 100%; /* Make button full width */
+        height: 40px; /* Adjust height as needed */
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: rgba(100, 149, 237, 1);
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #f0edf3;
+    }
+</style>
+
+<div class="row">
+    <h2>Sign up as a {{ user_type }}</h2>
+    <form method="post" novalidate>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" >Sign up</button>
-      </form>
-  </div>
+        <button type="submit">Sign up</button>
+    </form>
+</div>
 {% endblock %}

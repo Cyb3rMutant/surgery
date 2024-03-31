@@ -1,8 +1,71 @@
-{% extends 'base.html' %}
 {% block content %}
-<br />
-doctor dashboard
-<br />
-<a href="{% url 'view-appointments' %}">appoint</a>
-<a href="/logout">logout</a>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    body {
+        height: 100vh;
+        background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
+        font-size: 16px;
+        color: #03e9f4;
+        position: relative; /* Make body a positioning context */
+    }
+
+    .center {
+        text-align: center; /* Center-align content */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .action-box {
+        display: inline-block;
+        margin-right: 10px; /* Add space between boxes */
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+    }
+
+    a {
+        display: block;
+        margin: 10px 0;
+        color: #03e9f4;
+        text-decoration: none;
+        transition: color 0.3s ease; /* Transition color on hover */
+    }
+
+    a:hover {
+        color: #0f52ba;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #f0edf3;
+    }
+
+    .logout {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #03e9f4;
+        text-decoration: none;
+    }
+
+    .logout:hover {
+        color: #0f52ba;
+    }
+</style>
+
+<div class="center">
+    <h2>Doctor Dashboard</h2>
+    <div class="action-box">
+        <a href="{% url 'view-appointments' %}">Appoint to a Patient</a>
+    </div>
+</div>
+<a href="/logout" class="logout">Logout</a>
 {% endblock %}
+

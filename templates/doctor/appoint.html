@@ -1,8 +1,76 @@
-{% extends 'base.html' %} {% block content %}
-<h1> {{ appointment.patient }} {{ appointment.description }} {{ appointment.date }} </h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    body {
+        height: 100vh;
+        background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
+        font-size: 16px;
+        color: #03e9f4;
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+
+    form {
+        width: 50%; /* Adjust form width as needed */
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 20px;
+        border-radius: 5px;
+        margin: 0 auto; /* Center the form horizontally */
+    }
+
+    form label {
+        display: block;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    form input[type="text"],
+    form textarea,
+    form input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: none;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.5); /* Light white background */
+        color: #000; /* Black text color */
+        outline: none;
+    }
+
+    form button[type="submit"] {
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        background-color: rgba(100, 149, 237, .7);
+        color: aliceblue;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    form button[type="submit"]:hover {
+        background-color: rgba(100, 149, 237, 1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #f0edf3;
+    }
+</style>
+
+<h1>{{ appointment.patient }} {{ appointment.description }} {{ appointment.date }}</h1>
 <form method="post" novalidate>
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit"> submit</button>
-</form
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Submit</button>
+</form>
 {% endblock %}

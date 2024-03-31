@@ -1,12 +1,54 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        height: 100vh;
+        background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
+        font-size: 16px;
+        color: #fff; /* Set default text color to white */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    h2 {
+        text-align: center;
+        color: #fff; /* Set h2 text color to white */
+        margin-bottom: 20px; /* Add margin below h2 */
+    }
+</style>
+
+<h2>Doctor's Feedback</h2>
+
 <table>
   <thead>
     <tr>
-      <th>date</th>
-      <th>description</th>
-      <th>doctor</th>
-      <th>details</th>
-      <th>price</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Doctor</th>
+      <th>Details</th>
+      <th>Price</th>
     </tr>
   </thead>
   <tbody>
@@ -20,7 +62,7 @@
     </tr>
     {% empty %}
     <tr>
-      <td colspan="4">No prescriptions</td>
+      <td colspan="5">No prescriptions</td>
     </tr>
     {% endfor %}
   </tbody>

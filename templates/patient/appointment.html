@@ -1,8 +1,54 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        height: 100vh;
+        background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
+        font-size: 16px;
+        color: #03e9f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    form {
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    form button {
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(100, 149, 237, .7);
+        color: aliceblue;
+        width: 200px;
+        height: 40px;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+        background-color: rgba(100, 149, 237, 1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+        color: #f0edf3;
+    }
+
+</style>
+
 <div class="row">
   <form method="post" novalidate>
-    {% csrf_token %} {{ form.as_p }}
-    <button type="submit">submit appointment</button>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Appointment</button>
   </form>
 </div>
 {% endblock %}

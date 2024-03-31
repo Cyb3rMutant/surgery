@@ -32,6 +32,7 @@ services:
     # This means that the port 5432 of the host will be mapped to the port 5432 of the container.
     # ports:
     #   - "5432:5432"
+    #  postgres server ID if db don't work : 303081e6e8c5
     # Environment variables
     environment:
       POSTGRES_PASSWORD: postgres

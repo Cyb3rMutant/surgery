@@ -1,11 +1,78 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Log in</h2>
-<form method="post" novalidate>
-  {% csrf_token %}
-  {{ form.username }}
-  {{ form.password }}
-  <button type="submit" class="btn btn-primary">Log in</button>
-</form>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    body {
+        height: 100vh;
+        background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        color: #03e9f4;
+    }
+
+    .center {
+        text-align: center; /* Center-align content */
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    input,
+    select {
+        margin: 10px 0; /* Add space around input fields */
+        border-radius: 5px;
+        border: none;
+        height: 30px;
+        width: 240px;
+        background-color: rgba(216, 191, 216, 0.5);
+        outline: none;
+        color: #f0edf3;
+        padding-left: 10px;
+    }
+
+    .button {
+        margin-top: 10px; /* Add space above the button */
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(100, 149, 237, .7);
+        color: aliceblue;
+        width: 150px; /* Increased width of the button */
+        height: 40px; /* Adjust height as needed */
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: rgba(100, 149, 237, 1);
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #f0edf3;
+    }
+</style>
+
+<div class="center">
+    <img src="src/smartsurg.png" alt="Logo" class="logo">
+    <h2>Log in</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        {{ form.username }}
+    
+        <label for="password">Password:</label>
+        {{ form.password }}
+        <button type="submit" class="button">Log in</button>
+    </form>
+</div>
 {% endblock %}

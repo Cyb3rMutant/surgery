@@ -1,10 +1,58 @@
 {% extends 'base.html' %}
-{% block content %}
-  <h2>Welcome to SmartCare surgery! <span class="icon-emo-happy"></span></h2>
-  <p class="lead">
-    If you already have an account, go ahead and <a href="{% url 'login' %}">log in</a>. If you are new get started
-    by creating a <a href="{% url 'patient_signup' %}">patient account</a> or a <a href="{% url 'doctor_signup' %}">doctor account</a>.
 
-  </p>
-  <hr>
+{% block content %}
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+  }
+
+  body {
+    height: 100vh;
+    background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center-align items vertically and horizontally */
+    font-size: 16px;
+    color: #03e9f4;
+    padding: 20px; /* Add padding for spacing */
+  }
+
+  h2 {
+    margin-bottom: 20px; /* Add spacing below h2 */
+    color: #f0edf3; /* Change text color */
+    font-weight: bold; /* Make text bold */
+    text-align: center; /* Center-align text */
+  }
+
+  .lead {
+    color: #f0edf3; /* Change text color */
+    text-align: center; /* Center-align text */
+    max-width: 600px; /* Set max width for text */
+    margin: 0 auto; /* Center text horizontally */
+  }
+
+  .lead a {
+    color: #03e9f4; /* Change link color */
+    text-decoration: none; /* Remove underline from links */
+  }
+
+  .lead a:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
+
+  hr {
+    margin-top: 20px; /* Add spacing above hr */
+    border: none; /* Remove border */
+    border-top: 1px solid #f0edf3; /* Add top border */
+  }
+</style>
+
+<h2>Welcome to SmartCare surgery! <span class="icon-emo-happy"></span></h2>
+<p class="lead">
+  If you already have an account, go ahead and <a href="{% url 'login' %}">log in</a>. If you are new get started
+  by creating a <a href="{% url 'patient_signup' %}">patient account</a> or a <a href="{% url 'doctor_signup' %}">doctor account</a>.
+</p>
+<hr>
 {% endblock %}
