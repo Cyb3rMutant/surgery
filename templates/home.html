@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <style>
@@ -26,6 +27,10 @@
     text-align: center; /* Center-align text */
   }
 
+  .logo {
+      margin-bottom: 20px;
+  }
+
   .lead {
     color: #f0edf3; /* Change text color */
     text-align: center; /* Center-align text */
@@ -49,6 +54,7 @@
   }
 </style>
 
+<img src="{% static 'smartsurg.png' %}" alt="Logo" class="logo">
 <h2>Welcome to SmartCare surgery! <span class="icon-emo-happy"></span></h2>
 <p class="lead">
   If you already have an account, go ahead and <a href="{% url 'login' %}">log in</a>. If you are new get started
