@@ -1,4 +1,4 @@
-![image](src/uwe.png)
+![image](img/uwe.png)
 
 # Module Name: Distributed and enterprise software development - Assignment
 

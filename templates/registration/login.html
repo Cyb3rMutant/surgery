@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <style>
@@ -63,7 +64,7 @@
 </style>
 
 <div class="center">
-    <img src="src/smartsurg.png" alt="Logo" class="logo">
+    <img src="{% static 'smartsurg.png' %}" alt="Logo" class="logo">
     <h2>Log in</h2>
     <form method="post" novalidate>
         {% csrf_token %}
