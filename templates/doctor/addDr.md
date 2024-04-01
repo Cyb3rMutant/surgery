@@ -1,6 +1,6 @@
 ```bash
-You need to Add a New Doctor and Give Access ?
-And
+You need to Add a New Doctor and Give Access ? 
+
 if you are running with docker follow these steps:
 
 1 - docker-compose up -d
