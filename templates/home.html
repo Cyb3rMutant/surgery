@@ -13,6 +13,7 @@
     height: 100vh;
     background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
     display: flex;
+    flex-direction: column; /* Align items in a column */
     justify-content: center;
     align-items: center; /* Center-align items vertically and horizontally */
     font-size: 16px;
@@ -28,7 +29,10 @@
   }
 
   .logo {
-      margin-bottom: 20px;
+    margin-bottom: 50px;
+    margin-left: 185px; /* Adjust margin right for logo */
+    max-width: 220px; /* Set maximum width for logo */
+    height: auto; /* Maintain aspect ratio */
   }
 
   .lead {
@@ -51,6 +55,8 @@
     margin-top: 20px; /* Add spacing above hr */
     border: none; /* Remove border */
     border-top: 1px solid #f0edf3; /* Add top border */
+    width: 100%; /* Set hr width to 100% */
+    max-width: 600px; /* Set max width for hr */
   }
 </style>
 
