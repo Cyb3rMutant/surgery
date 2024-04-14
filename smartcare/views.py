@@ -2,12 +2,17 @@ from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import AppointmentForm, PrescriptionForm, UserCreationForm
+from .forms import AppointmentForm, PaymentForm, PrescriptionForm, UserCreationForm
 from django.views.generic import ListView, TemplateView
 from django.db import transaction
 from django.contrib import messages
+from django.utils import timezone
+from django.db.models import Sum
+from datetime import timedelta
+from django.db.models.functions import TruncMonth
 
-from .models import Appointment, Prescription, User
+
+from .models import Appointment, Payment, Prescription, User
 from .forms import DoctorSignUpForm, NurseSignUpForm, PatientSignUpForm
 
 
@@ -146,3 +151,61 @@ class ViewPrescriptions(ListView):
         print("\n\n\n", appointments)
         queryset = Prescription.objects.filter(appointment__in=appointments)
         return queryset
+
+
+def pay(request, pk):
+    prescription = get_object_or_404(Prescription, pk=pk)
+    if Payment.objects.filter(pk=pk).exists():
+        print("already done")
+        return redirect("home")
+
+    if request.method == "POST":
+        form = PaymentForm(data=request.POST)
+        if form.is_valid():
+            with transaction.atomic():
+                payment = form.save(commit=False)
+                payment.prescription = prescription
+                payment.save()
+
+                print("now done")
+                return redirect("home")
+    form = PaymentForm()
+
+    return render(
+        request,
+        "patient/pay.html",
+        {
+            "prescription": prescription,
+            "form": form,
+        },
+    )
+
+
+class PaymentsPerMonth(ListView):
+    template_name = "doctor/view-payments.html"
+    context_object_name = "monthly_payments"
+
+    def get_queryset(self):
+        # Calculate the start date and end date for the last 10 months
+        today = timezone.now()
+        ten_months_ago = today - timedelta(days=10 * 30)  # Assuming 30 days per month
+        end_date = today.replace(day=1)  # First day of the current month
+        start_date = ten_months_ago.replace(day=1)  # First day of the 10th month ago
+
+        # Aggregate payments for each month
+        monthly_payments = (
+            Payment.objects.filter(
+                payment_type="nhs",
+                prescription__appointment__date__gte=start_date,
+                prescription__appointment__date__lt=end_date,
+            )
+            .annotate(month=TruncMonth("prescription__appointment__date"))
+            .values("month")
+            .annotate(total_payment=Sum("prescription__price"))
+            .order_by("-month")
+        )  # Get the last 10 months
+        from pprint import pprint
+
+        pprint([x for x in monthly_payments])
+
+        return monthly_payments

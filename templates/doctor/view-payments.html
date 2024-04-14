@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Include padding and border in element's total width and height */
+  }
+
+  body {
+    height: 100vh;
+    background-image: linear-gradient(to bottom right,
+        rgb(114, 135, 254),
+        rgb(130, 88, 186));
+    font-size: 16px;
+    color: #03e9f4;
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+  }
+
+  table {
+    width: 80%;
+    /* Adjust table width as needed */
+    margin-bottom: 20px;
+    /* Add space between table and form */
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+  }
+
+  table th,
+  table td {
+    padding: 10px;
+    text-align: left;
+  }
+
+  table th {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Darker background for table header */
+    color: #fff;
+    /* White text color for table header */
+  }
+
+  table td a {
+    color: #03e9f4;
+    /* Link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    /* Transition color on hover */
+  }
+
+  table td a:hover {
+    color: #0f52ba;
+    /* Change link color on hover */
+  }
+
+  form {
+    width: 80%;
+    /* Adjust form width */
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  form label {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  form input[type="text"],
+  form textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+    background-color: rgba(216, 191, 216, 0.5);
+    color: #f0edf3;
+    outline: none;
+  }
+
+  button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: rgba(100, 149, 237, 0.7);
+    color: aliceblue;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: rgba(100, 149, 237, 1);
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #f0edf3;
+  }
+</style>
+
+<table>
+  <thead>
+    <tr>
+      <th>Month</th>
+      <th>Total payments</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for payment in monthly_payments %}
+    <tr>
+      <td>{{ payment.month|date:"F Y" }}</td>
+      <td>{{ payment.total_payment }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="2">No payments</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

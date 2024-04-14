@@ -49,6 +49,7 @@
       <th>Doctor</th>
       <th>Details</th>
       <th>Price</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -59,10 +60,13 @@
       <td>{{ pre.doctor }}</td>
       <td>{{ pre.details }}</td>
       <td>{{ pre.price }}</td>
+      <td>
+          <a href="{% url 'pay' pre.pk %}" ><button>Pay</button></a>
+      </td>
     </tr>
     {% empty %}
     <tr>
-      <td colspan="5">No prescriptions</td>
+      <td colspan="6">No prescriptions</td>
     </tr>
     {% endfor %}
   </tbody>

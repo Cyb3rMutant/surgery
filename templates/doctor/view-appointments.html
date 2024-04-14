@@ -71,7 +71,7 @@
         outline: none;
     }
 
-    form button[type="submit"] {
+    button {
         border: none;
         border-radius: 5px;
         padding: 10px 20px;
@@ -82,7 +82,7 @@
         transition: background-color 0.3s ease;
     }
 
-    form button[type="submit"]:hover {
+    button:hover {
         background-color: rgba(100, 149, 237, 1);
     }
 
@@ -109,7 +109,7 @@
             <td>{{ ap.description }}</td>
             <td>{{ ap.date }}</td>
             <td>
-                <a href="{% url 'appoint' ap.pk %}" >Appoint</a>
+                <a href="{% url 'appoint' ap.pk %}" ><button>Appoint</button></a>
             </td>
         </tr>
         {% empty %}
@@ -120,9 +120,4 @@
     </tbody>
 </table>
 
-<form method="post" novalidate>
-    {% csrf_token %}
-    <!-- Form fields here -->
-    <button type="submit">Submit Appointment</button>
-</form>
 {% endblock %}

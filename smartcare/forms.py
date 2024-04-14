@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import Appointment, Prescription, User
+from .models import Appointment, Payment, Prescription, User
 
 
 class PatientSignUpForm(UserCreationForm):
@@ -53,7 +53,7 @@ class UserChangeForm(UserChangeForm):
 
 
 class AppointmentForm(forms.ModelForm):
-    date = forms.DateField(input_formats=["%m/%d/%Y", "%m/%d/%y"])
+    date = forms.DateField(input_formats=["%d/%m/%Y", "%d/%m/%y"])
 
     class Meta:
         model = Appointment
@@ -69,4 +69,15 @@ class PrescriptionForm(forms.ModelForm):
         fields = (
             "details",
             "price",
+        )
+
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = (
+            "payment_type",
+            "name_on_card",
+            "card_number",
+            "cvv",
         )
