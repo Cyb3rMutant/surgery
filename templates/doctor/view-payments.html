@@ -102,7 +102,28 @@
     margin-top: 20px;
     color: #f0edf3;
   }
+
+    /* styles for back button */
+  .back-button {
+    display: block;
+    margin-bottom: 20px; /* Add space below the button */
+    text-align: center;
+    position: absolute; /* Position the button absolutely */
+    left: 20px; /* Adjust the distance from the left side */
+    top: 20px; /* Adjust the distance from the top */
+  }
+
+  .back-button button {
+    padding: 15px 30px; /* Increase padding to make button bigger */
+    font-size: 18px; /* Increase font size */
+    background-color: #2E86C1; /* Change background color */
+  }
 </style>
+
+<!-- Back button -->
+<div class="back-button">
+  <button onclick="window.history.back()">Back</button>
+</div>
 
 <table>
   <thead>
