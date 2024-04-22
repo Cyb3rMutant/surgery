@@ -9,6 +9,7 @@ class User(AbstractUser):
         ("doctor", "Doctor"),
     )
     role = models.CharField(max_length=20, choices=ROLES, default="patient")
+    address = models.TextField()
 
 
 class Appointment(models.Model):

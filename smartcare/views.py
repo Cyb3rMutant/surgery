@@ -1,10 +1,11 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserChangeForm
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import AppointmentForm, PaymentForm, PrescriptionForm, UserCreationForm
+from .forms import AppointmentForm, PaymentForm, PrescriptionForm, PersonalDetailsForm
 from django.views.generic import ListView, TemplateView
 from django.db import transaction
 from django.contrib import messages
@@ -67,6 +68,35 @@ class DoctorSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect("home")
+
+
+# @method_decorator([login_required], name="dispatch")
+# class UpdateDetails(UpdateView):
+#     model = User
+#     form_class = PersonalDetailsForm
+#     template_name = "update.html"
+#
+#     def form_valid(self, form):
+#         u = form.save(commit=False)
+#         u.save()
+#         messages.success(
+#             self.request,
+#             "details updated",
+#         )
+#         return redirect("home")
+
+
+@login_required
+def updateDetails(request):
+    if request.method == "POST":
+        form = PersonalDetailsForm(data=request.POST, instance=request.user)
+        update = form.save(commit=False)
+        update.user = request.user
+        update.save()
+    else:
+        form = PersonalDetailsForm(instance=request.user)
+
+    return render(request, "update.html", {"form": form})
 
 
 @method_decorator([login_required, patient_required], name="dispatch")
