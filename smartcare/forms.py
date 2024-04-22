@@ -32,20 +32,6 @@ class DoctorSignUpForm(UserCreationForm):
         return user
 
 
-class NurseSignUpForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ("username", "email")
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.role = User.ROLES[2][0]
-        user.is_active = False
-        if commit:
-            user.save()
-        return user
-
-
 class UserChangeForm(UserChangeForm):
 
     class Meta:
@@ -54,9 +40,11 @@ class UserChangeForm(UserChangeForm):
 
 
 class AppointmentForm(forms.ModelForm):
-    date = forms.DateField(input_formats=["%d/%m/%Y", "%d/%m/%y"], 
-                           widget=forms.SelectDateWidget(), 
-                           initial=timezone.now().date())
+    date = forms.DateField(
+        input_formats=["%d/%m/%Y", "%d/%m/%y"],
+        widget=forms.SelectDateWidget(),
+        initial=timezone.now().date(),
+    )
 
     class Meta:
         model = Appointment

@@ -1,5 +1,7 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import AppointmentForm, PaymentForm, PrescriptionForm, UserCreationForm
@@ -10,10 +12,11 @@ from django.utils import timezone
 from django.db.models import Sum
 from datetime import timedelta
 from django.db.models.functions import TruncMonth
+from .decorators import doctor_required, patient_required
 
 
 from .models import Appointment, Payment, Prescription, User
-from .forms import DoctorSignUpForm, NurseSignUpForm, PatientSignUpForm
+from .forms import DoctorSignUpForm, PatientSignUpForm
 
 
 def home(request):
@@ -24,9 +27,6 @@ def home(request):
             case "doctor":
                 if request.user.is_active:
                     return render(request, "dashboards/doctor.html")
-            case "nurse":
-                if request.user.is_active:
-                    return render(request, "dashboards/nurse.html")
     return render(request, "home.html")
 
 
@@ -54,21 +54,6 @@ class PatientSignUpView(CreateView):
         return redirect("home")
 
 
-class NurseSignUpView(CreateView):
-    model = User
-    form_class = NurseSignUpForm
-    template_name = "registration/signup.html"
-
-    def get_context_data(self, **kwargs):
-        kwargs["user_type"] = "nurse"
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect("home")
-
-
 class DoctorSignUpView(CreateView):
     model = User
     form_class = DoctorSignUpForm
@@ -84,6 +69,7 @@ class DoctorSignUpView(CreateView):
         return redirect("home")
 
 
+@method_decorator([login_required, patient_required], name="dispatch")
 class MakeAppointment(CreateView):
     model = Appointment
     form_class = AppointmentForm
@@ -100,6 +86,7 @@ class MakeAppointment(CreateView):
         return redirect("home")
 
 
+@method_decorator([login_required, doctor_required], name="dispatch")
 class AppointmentListView(ListView):
     model = Appointment
     ordering = ("date",)
@@ -111,6 +98,8 @@ class AppointmentListView(ListView):
         return queryset
 
 
+@login_required
+@doctor_required
 def appoint(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
     if Prescription.objects.filter(pk=pk).exists():
@@ -140,6 +129,7 @@ def appoint(request, pk):
     )
 
 
+@method_decorator([login_required, patient_required], name="dispatch")
 class ViewPrescriptions(ListView):
     model = Prescription
     ordering = ("date",)
@@ -153,6 +143,8 @@ class ViewPrescriptions(ListView):
         return queryset
 
 
+@login_required
+@doctor_required
 def pay(request, pk):
     prescription = get_object_or_404(Prescription, pk=pk)
     if Payment.objects.filter(pk=pk).exists():
@@ -181,6 +173,7 @@ def pay(request, pk):
     )
 
 
+@method_decorator([login_required, doctor_required], name="dispatch")
 class PaymentsPerMonth(ListView):
     template_name = "doctor/view-payments.html"
     context_object_name = "monthly_payments"

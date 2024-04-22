@@ -1,0 +1,310 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Include padding and border in element's total width and height */
+}
+
+body {
+  height: 100vh;
+  background-image: linear-gradient(to bottom right,
+      rgb(114, 135, 254),
+      rgb(130, 88, 186));
+  display: flex;
+  flex-direction: column;
+  /* Align items in a column */
+  justify-content: center;
+  align-items: center;
+  /* Center-align items vertically and horizontally */
+  font-size: 16px;
+  color: #03e9f4;
+  padding: 20px;
+  /* Add padding for spacing */
+}
+
+h2 {
+  margin-bottom: 20px;
+  /* Add spacing below h2 */
+  color: #f0edf3;
+  /* Change text color */
+  font-weight: bold;
+  /* Make text bold */
+  text-align: center;
+  /* Center-align text */
+}
+
+.center {
+  text-align: center;
+  /* Center-align content */
+}
+
+.logo {
+  margin-bottom: 50px;
+  margin-left: 185px;
+  /* Adjust margin right for logo */
+  max-width: 220px;
+  /* Set maximum width for logo */
+  height: auto;
+  /* Maintain aspect ratio */
+}
+
+.lead {
+  color: #f0edf3;
+  /* Change text color */
+  text-align: center;
+  /* Center-align text */
+  max-width: 600px;
+  /* Set max width for text */
+  margin: 0 auto;
+  /* Center text horizontally */
+}
+
+.lead a {
+  color: #03e9f4;
+  /* Change link color */
+  text-decoration: none;
+  /* Remove underline from links */
+}
+
+.lead a:hover {
+  text-decoration: underline;
+  /* Add underline on hover */
+}
+
+hr {
+  margin-top: 20px;
+  /* Add spacing above hr */
+  border: none;
+  /* Remove border */
+  border-top: 1px solid #f0edf3;
+  /* Add top border */
+  width: 100%;
+  /* Set hr width to 100% */
+  max-width: 600px;
+  /* Set max width for hr */
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+.row {
+  text-align: center;
+  /* Center-align content */
+  width: 50%;
+  /* Adjust width of the form */
+  margin: 0 auto;
+  /* Center the form horizontally */
+}
+
+input,
+select {
+  margin: 10px 0;
+  /* Add space around input fields */
+  border-radius: 5px;
+  border: none;
+  height: 30px;
+  width: 240px;
+  background-color: rgba(216, 191, 216, 0.5);
+  outline: none;
+  color: #f0edf3;
+  padding-left: 10px;
+}
+
+.button {
+  margin-top: 10px;
+  /* Add space above the button */
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(100, 149, 237, 0.7);
+  color: aliceblue;
+  width: 150px;
+  /* Increased width of the button */
+  height: 40px;
+  /* Adjust height as needed */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: rgba(100, 149, 237, 1);
+}
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+  color: white;
+}
+
+form {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+form button {
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(100, 149, 237, 0.7);
+  color: aliceblue;
+  width: 200px;
+  height: 40px;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: rgba(100, 149, 237, 1);
+}
+
+form input[type="text"],
+form textarea,
+form input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* Light white background */
+  color: #000;
+  /* Black text color */
+  outline: none;
+}
+
+form button[type="submit"] {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: rgba(100, 149, 237, 0.7);
+  color: aliceblue;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: rgba(100, 149, 237, 1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #f0edf3;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #4caf50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table {
+  width: 80%;
+  /* Adjust table width as needed */
+  margin-bottom: 20px;
+  /* Add space between table and form */
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: left;
+}
+
+table th {
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Darker background for table header */
+  color: #fff;
+  /* White text color for table header */
+}
+
+table td a {
+  color: #03e9f4;
+  /* Link color */
+  text-decoration: none;
+  transition: color 0.3s ease;
+  /* Transition color on hover */
+}
+
+table td a:hover {
+  color: #0f52ba;
+  /* Change link color on hover */
+}
+
+.center {
+  text-align: center;
+  /* Center-align content */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.action-box {
+  display: inline-block;
+  margin-right: 10px;
+  /* Add space between boxes */
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+.action-box a {
+  color: white;
+  /* Text color inside action-box */
+  text-decoration: none;
+}
+
+a {
+  display: block;
+  margin: 10px 0;
+  color: #03e9f4;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  /* Transition color on hover */
+}
+
+a:hover {
+  color: #0f52ba;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #f0edf3;
+}
+
+.logout {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #03e9f4;
+  text-decoration: none;
+}
+
+.logout:hover {
+  color: #0f52ba;
+}

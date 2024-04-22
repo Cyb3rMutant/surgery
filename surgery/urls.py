@@ -32,11 +32,6 @@ urlpatterns = [
         name="doctor_signup",
     ),
     path(
-        "accounts/signup/nurse/",
-        views.NurseSignUpView.as_view(),
-        name="nurse_signup",
-    ),
-    path(
         "accounts/signup/patient/",
         views.PatientSignUpView.as_view(),
         name="patient_signup",
