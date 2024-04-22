@@ -1,4 +1,5 @@
 from django import forms
+from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from .models import Appointment, Payment, Prescription, User
@@ -53,7 +54,9 @@ class UserChangeForm(UserChangeForm):
 
 
 class AppointmentForm(forms.ModelForm):
-    date = forms.DateField(input_formats=["%d/%m/%Y", "%d/%m/%y"])
+    date = forms.DateField(input_formats=["%d/%m/%Y", "%d/%m/%y"], 
+                           widget=forms.SelectDateWidget(), 
+                           initial=timezone.now().date())
 
     class Meta:
         model = Appointment
