@@ -74,6 +74,12 @@
     <div class="action-box">
         <a href="{% url 'view-prescriptions' %}">View Prescriptions</a>
     </div>
+    <!-- New section for Update Details -->
+    {% if request.user.role == 'patient' %}
+    <div class="action-box">
+        <a href="{% url 'update' %}">Update My Details</a>
+    </div>
+    {% endif %}
 </div>
 <a href="/logout" class="logout">Logout</a>
 {% endblock %}
