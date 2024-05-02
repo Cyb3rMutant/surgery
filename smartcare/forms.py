@@ -7,21 +7,26 @@ from .models import Appointment, Payment, Prescription, User
 
 class PatientSignUpForm(UserCreationForm):
     date_of_birth = forms.DateField(
-        label='Date of Birth',  # Label for the field
-        widget=forms.SelectDateWidget(years=range(1900, timezone.now().year+1)),  # Calendar widget
+        label="Date of Birth",  # Label for the field
+        widget=forms.SelectDateWidget(
+            years=range(1900, timezone.now().year + 1)
+        ),  # Calendar widget
         required=False,  # Field not required
     )
 
     alias_choices = (
-        ('', 'Select Alias'),  # Default empty value
-        ('Dr.', 'Dr.'), 
-        ('Mr.', 'Mr.'),       
-        ('Miss.', 'Miss.',),
-        ('Mrs', 'Mrs.'),
-        ('Prof', 'Prof.')
+        ("", "Select Alias"),  # Default empty value
+        ("Dr.", "Dr."),
+        ("Mr.", "Mr."),
+        (
+            "Miss.",
+            "Miss.",
+        ),
+        ("Mrs", "Mrs."),
+        ("Prof", "Prof."),
     )
-    alias = forms.ChoiceField(choices=alias_choices, label='Alias')
-    
+    alias = forms.ChoiceField(choices=alias_choices, label="Alias")
+
     class Meta:
         model = User
         fields = (
@@ -45,21 +50,26 @@ class PatientSignUpForm(UserCreationForm):
 
 class DoctorSignUpForm(UserCreationForm):
     date_of_birth = forms.DateField(
-        label='Date of Birth',  # Label for the field
-        widget=forms.SelectDateWidget(years=range(1900, timezone.now().year+1)),  # Calendar widget
+        label="Date of Birth",  # Label for the field
+        widget=forms.SelectDateWidget(
+            years=range(1900, timezone.now().year + 1)
+        ),  # Calendar widget
         required=False,  # Field not required
     )
 
     alias_choices = (
-        ('', 'Select Alias'),  # Default empty value
-        ('Dr.', 'Dr.'), 
-        ('Mr.', 'Mr.'),       
-        ('Miss.', 'Miss.',),
-        ('Mrs', 'Mrs.'),
-        ('Prof', 'Prof.')
+        ("", "Select Alias"),  # Default empty value
+        ("Dr.", "Dr."),
+        ("Mr.", "Mr."),
+        (
+            "Miss.",
+            "Miss.",
+        ),
+        ("Mrs", "Mrs."),
+        ("Prof", "Prof."),
     )
-    alias = forms.ChoiceField(choices=alias_choices, label='Alias')
-    
+    alias = forms.ChoiceField(choices=alias_choices, label="Alias")
+
     class Meta:
         model = User
         fields = (
@@ -91,8 +101,10 @@ class UserChangeForm(UserChangeForm):
 
 class PersonalDetailsForm(UserChangeForm):
     date_of_birth = forms.DateField(
-        label='Date of Birth',  # Label for the field
-        widget=forms.SelectDateWidget(years=range(1900, timezone.now().year+1)),  # Calendar widget
+        label="Date of Birth",  # Label for the field
+        widget=forms.SelectDateWidget(
+            years=range(1900, timezone.now().year + 1)
+        ),  # Calendar widget
         required=False,  # Field not required
     )
 
@@ -110,9 +122,7 @@ class PersonalDetailsForm(UserChangeForm):
 
 class AppointmentForm(forms.ModelForm):
     date = forms.DateField(
-        input_formats=["%d/%m/%Y", "%d/%m/%y"],
-        widget=forms.SelectDateWidget(),
-        initial=timezone.now().date(),
+        input_formats=["%m/%d/%Y", "%m/%d/%y"],
     )
 
     class Meta:

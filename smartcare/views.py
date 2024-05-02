@@ -51,7 +51,7 @@ class PatientSignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        user.date_of_birth = form.cleaned_data['date_of_birth']  # Save date of birth
+        user.date_of_birth = form.cleaned_data["date_of_birth"]  # Save date of birth
         login(self.request, user)
         return redirect("home")
 
@@ -67,7 +67,7 @@ class DoctorSignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        user.date_of_birth = form.cleaned_data['date_of_birth']  # Save date of birth
+        user.date_of_birth = form.cleaned_data["date_of_birth"]  # Save date of birth
 
         login(self.request, user)
         return redirect("home")
