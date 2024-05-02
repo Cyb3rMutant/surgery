@@ -17,4 +17,13 @@ if you are running with docker follow these steps:
 12 - go to 127.0.0.1:8000/logout
 13 - now you should be able to login as that doctor
 
+export and add dumpp data: 
+$ docker exec -it project-smartcare-1 bash
+# python manage.py dumpdata > dump.json
+
+then to load data:
+
+$ docker exec -it project-smartcare-1 bash
+# python manage.py loaddata dump.json
+
 ```
