@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 
 
+# Create your models here.
 # Create your models here.
 class User(AbstractUser):
     ROLES = (
@@ -10,6 +12,7 @@ class User(AbstractUser):
     )
     role = models.CharField(max_length=20, choices=ROLES, default="patient")
     address = models.TextField()
+    date_of_birth = models.DateField(null=True, blank=True)  # Change to DateField
 
 
 class Appointment(models.Model):

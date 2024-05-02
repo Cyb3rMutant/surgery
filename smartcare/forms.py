@@ -1,43 +1,81 @@
 from django import forms
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
+from django.core.validators import RegexValidator
 from .models import Appointment, Payment, Prescription, User
 
 
 class PatientSignUpForm(UserCreationForm):
+    date_of_birth = forms.DateField(
+        label='Date of Birth',  # Label for the field
+        widget=forms.SelectDateWidget(years=range(1900, timezone.now().year+1)),  # Calendar widget
+        required=False,  # Field not required
+    )
+
+    alias_choices = (
+        ('', 'Select Alias'),  # Default empty value
+        ('Dr.', 'Dr.'), 
+        ('Mr.', 'Mr.'),       
+        ('Miss.', 'Miss.',),
+        ('Mrs', 'Mrs.'),
+        ('Prof', 'Prof.')
+    )
+    alias = forms.ChoiceField(choices=alias_choices, label='Alias')
+    
     class Meta:
         model = User
         fields = (
             "username",
             "email",
+            "alias",  # Added alias here
             "first_name",
             "last_name",
             "address",
+            "date_of_birth",  # Added date_of_birth here
         )
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.role = User.ROLES[0][0]
+        user.date_of_birth = self.cleaned_data["date_of_birth"]  # Save date of birth
         if commit:
             user.save()
         return user
 
 
 class DoctorSignUpForm(UserCreationForm):
+    date_of_birth = forms.DateField(
+        label='Date of Birth',  # Label for the field
+        widget=forms.SelectDateWidget(years=range(1900, timezone.now().year+1)),  # Calendar widget
+        required=False,  # Field not required
+    )
+
+    alias_choices = (
+        ('', 'Select Alias'),  # Default empty value
+        ('Dr.', 'Dr.'), 
+        ('Mr.', 'Mr.'),       
+        ('Miss.', 'Miss.',),
+        ('Mrs', 'Mrs.'),
+        ('Prof', 'Prof.')
+    )
+    alias = forms.ChoiceField(choices=alias_choices, label='Alias')
+    
     class Meta:
         model = User
         fields = (
             "username",
             "email",
+            "alias",  # Added alias here
             "first_name",
             "last_name",
             "address",
+            "date_of_birth",  # Added date_of_birth here
         )
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.role = User.ROLES[1][0]
+        user.date_of_birth = self.cleaned_data["date_of_birth"]  # Save date of birth
         user.is_active = False
         if commit:
             user.save()
@@ -52,6 +90,11 @@ class UserChangeForm(UserChangeForm):
 
 
 class PersonalDetailsForm(UserChangeForm):
+    date_of_birth = forms.DateField(
+        label='Date of Birth',  # Label for the field
+        widget=forms.SelectDateWidget(years=range(1900, timezone.now().year+1)),  # Calendar widget
+        required=False,  # Field not required
+    )
 
     class Meta:
         model = User
@@ -61,6 +104,7 @@ class PersonalDetailsForm(UserChangeForm):
             "first_name",
             "last_name",
             "address",
+            "date_of_birth",  # Add date_of_birth here
         )
 
 

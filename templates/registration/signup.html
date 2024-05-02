@@ -8,7 +8,7 @@
     }
 
     body {
-        height: 100vh;
+        height: 150vh;
         background-image: linear-gradient(to bottom right, rgb(114, 135, 254), rgb(130, 88, 186));
         display: flex;
         justify-content: center;
@@ -18,9 +18,13 @@
     }
 
     .row {
-        text-align: center; /* Center-align content */
-        width: 50%; /* Adjust width of the form */
-        margin: 0 auto; /* Center the form horizontally */
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 75%;
+        width: 500px; /* Adjust width as needed */
+        padding-bottom: 40px; /* Added padding for spacing */
+        margin: 0 auto; /* Center the container */
     }
 
     input,
@@ -72,6 +76,16 @@
     padding: 15px 30px; /* Increase padding to make button bigger */
     font-size: 18px; /* Increase font size */
     background-color: #2E86C1; /* Change background color */
+    }
+
+    .dob-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .dob-item {
+        width: calc(30% - 10px);
     }
 </style>
 
